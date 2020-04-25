@@ -72,7 +72,22 @@ public class ATMSecondaryScenariosTest {
 		atm.deposit(deposits, true);
 		assertEquals("Deposit amount cannot be zero", outContent.toString());
 	}
-
+	@Test
+	public void testDepositWithNullDenominations() {
+		initilizeWithZeroBalance();
+		Map<Long, Long> deposits = new HashMap<>();
+		deposits.put(20L, null);
+		atm.deposit(deposits, true);
+		assertEquals("Deposit amount cannot be zero", outContent.toString());
+	}	
+	@Test
+	public void testDepositWithOnlyTwentysWithNullValues() {
+		initilizeWithZeroBalance();
+		Map<Long, Long> deposits = new HashMap<>();
+		deposits.put(20L, null);
+		atm.deposit(deposits, true);
+		assertEquals("Deposit amount cannot be zero", outContent.toString());
+	}	
 	@Test
 	public void testDepositWithOnlyTwentysWithZeroBalance() {
 		initilizeWithZeroBalance();
@@ -81,6 +96,7 @@ public class ATMSecondaryScenariosTest {
 		atm.deposit(deposits, true);
 		assertEquals("Balance: 20s=10, 10s=0, 5s=0, 1s=0, Total=200", outContent.toString());
 	}
+	
 
 	@Test
 	public void testDepositWithOnlyTensWithZeroBalance() {
