@@ -63,6 +63,11 @@ public class ATM {
 	private boolean validateDeposit(Map<Long, Long> deposits) {
 		boolean isValid = true;
 		Long totalAmount = 0L;
+		int depositDenominationsCount=0;
+	     if(deposits==null) {
+	    	 System.out.print("Incorrect deposit amount");
+				isValid = false;
+	     }else {
 		for (Denominations denomination : Denominations.values()) {
 			long dollarBills = getDenominationValue(deposits, denomination.value());
 			// Validation fails if any of the dollar bills has negative value
@@ -71,10 +76,18 @@ public class ATM {
 				isValid = false;
 				break;
 			}
-			totalAmount += dollarBills * denomination.value();
-		}
+			if(deposits.containsKey(denomination.value())){
+			depositDenominationsCount++;
+			}
+				totalAmount += dollarBills * denomination.value();
+			}
+		// Validation fails if denominations are not matching
+	     if(isValid && depositDenominationsCount!=deposits.keySet().size()) {
+	    		System.out.print("Incorrect deposit amount");
+	    		isValid = false;				
+	     }		
 		// Validation fails if total value of the deposit is zero
-		if (isValid && totalAmount == 0) {
+	     else if (isValid && totalAmount == 0) {
 			System.out.print("Deposit amount cannot be zero");
 			isValid = false;
 		}
@@ -87,6 +100,7 @@ public class ATM {
 
 			isValid = false;
 		}
+	     }
 		return isValid;
 
 	}

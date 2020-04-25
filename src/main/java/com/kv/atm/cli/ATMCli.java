@@ -5,6 +5,11 @@ import java.util.Map;
 
 import com.kv.atm.ATM;
 
+/**
+ * This class is used to demonstrate the output for the sample input given
+ * @author Vimalraj Kanagaraj
+ *
+ */
 public class ATMCli {
 	 public static void main(String[] args) {
 
